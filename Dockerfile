@@ -18,4 +18,4 @@ ENV PYTHONPATH /app
 
 EXPOSE 2121
 
-ENTRYPOINT ["python", "-m", "app.src.main"]
+ENTRYPOINT ["python", "-m", "app.src.main1"]

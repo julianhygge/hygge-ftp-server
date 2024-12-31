@@ -1,11 +1,11 @@
-from pyftpdlib.handlers import TLS_FTPHandler
+from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 from app.utils.logger import logger
 from app.config.configuration import ApiConfiguration
 ftp_secret = ApiConfiguration().ftp_secret
 
-class FTPServerHandler(TLS_FTPHandler):
+class FTPServerHandler(FTPHandler):
 
     def on_connect(self):
         logger.info(f'FTP Server Connected {self.remote_ip}, {self.remote_port}')
@@ -39,10 +39,10 @@ def main():
     authorizer.add_anonymous(ftp_secret.homedir)
 
     handler = FTPServerHandler
-    handler.certfile = r'H:/PyCharm/hygge-ftp-server/cert.pem'
-    handler.keyfile =  r'H:/PyCharm/hygge-ftp-server/cert.key'
-    handler.tls_control_required = True
-    handler.tls_data_required = True
+    # handler.certfile = r'H:/PyCharm/hygge-ftp-server/cert.pem'
+    # handler.keyfile =  r'H:/PyCharm/hygge-ftp-server/cert.key'
+    # handler.tls_control_required = True
+    # handler.tls_data_required = True
     handler.authorizer = authorizer
     server = FTPServer((ftp_secret.host, ftp_secret.port), handler)
     server.serve_forever()
