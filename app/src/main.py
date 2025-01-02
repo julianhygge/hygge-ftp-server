@@ -1,11 +1,11 @@
-from pyftpdlib.handlers import FTPHandler
+from pyftpdlib.handlers import TLS_FTPHandler
 from pyftpdlib.servers import FTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 from app.utils.logger import logger
 from app.config.configuration import ApiConfiguration
 ftp_secret = ApiConfiguration().ftp_secret
 
-class FTPServerHandler(FTPHandler):
+class FTPServerHandler(TLS_FTPHandler):
 
     def on_connect(self):
         logger.info(f'FTP Server Connected {self.remote_ip}, {self.remote_port}')
