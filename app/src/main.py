@@ -39,10 +39,10 @@ def main():
     authorizer.add_anonymous(ftp_secret.homedir)
 
     handler = FTPServerHandler
-    # handler.certfile = r'H:/PyCharm/hygge-ftp-server/cert.pem'
-    # handler.keyfile =  r'H:/PyCharm/hygge-ftp-server/cert.key'
-    # handler.tls_control_required = True
-    # handler.tls_data_required = True
+    handler.certfile = ftp_secret.ssl_certificate
+    handler.keyfile =  ftp_secret.ssl_certificate_key
+    handler.tls_control_required = True
+    handler.tls_data_required = True
     handler.authorizer = authorizer
     server = FTPServer((ftp_secret.host, ftp_secret.port), handler)
     server.serve_forever()
